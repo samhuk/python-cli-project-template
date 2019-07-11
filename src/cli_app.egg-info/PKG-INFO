@@ -1,0 +1,57 @@
+Metadata-Version: 2.1
+Name: cli-app
+Version: 0.0.1
+Summary: CLI App
+Home-page: UNKNOWN
+Author: Joe Bloggs
+Author-email: joebloggs@email.com
+License: MIT
+Description: # PYTHON CLI TEMPLATE PROJECT
+        
+        ## CONVERSION OF TEMPLATE TO PROJECT
+        
+        This repository is a template for a python CLI(s) project.
+        
+        If the property "stage" within app_info.json equals "template", the app is in **template** stage.
+        
+        This section can be removed after this stage.
+        
+        First, one must run ```python setup.py install```. If the project is in template stage, all instances of cli_app
+        in this file are replaced by the "name" property value.
+        
+        ## Summary
+        
+        cli_app is an command line interface.
+        
+        ## Prerequisites
+        
+        Must have python >3 installed on the host system.
+        
+        ## Installation
+        
+        From the root application directory: `python setup.py install` or `install` (for windows only).
+        
+        `cli_app validate` to validate the CLI configuration.
+        
+        ## Usage
+        
+        `cli_app -h`
+        
+        ## Development
+        
+        To run the cli_app cli as a python module directly (unpackaged), one must run the src/cli_app/cli.py module, like so:
+        
+        `python -m src.cli_app.cli <command> [<args>...]`
+        
+        For example:
+          * `python -m src.cli_app.cli -h`
+          * `python -m src.cli_app.cli legend`
+          * etc.
+Keywords: cli
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Utilities
+Classifier: License :: Proprietry
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Provides-Extra: test

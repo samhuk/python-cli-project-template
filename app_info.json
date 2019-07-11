@@ -1,0 +1,16 @@
+{
+  "name": "cli_app",
+  "description": "CLI App",
+  "author": "Joe Bloggs",
+  "author_email": "joebloggs@email.com",
+  "license": "MIT",
+  "classifiers": [
+    "Intended Audience :: Developers",
+    "Topic :: Utilities",
+    "License :: Proprietry",
+    "Natural Language :: English",
+    "Operating System :: OS Independent"
+  ],
+  "url": null,
+  "stage": "template"
+}

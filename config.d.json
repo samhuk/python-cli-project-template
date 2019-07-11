@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": ".",
+  "title": "cli_app config",
+  "description": "Global configuration (env) for the XC-CLI.",
+  "type": "object",
+  "properties": {
+    "app_settings": {
+      "description": "General settings for the application",
+      "type": "object",
+      "properties": {
+        "simple_unicode_output": {
+          "description": "False to enable advanced/pretty unicode console output. True to use simple and widely available characters.",
+          "type": "boolean",
+          "default": true
+        },
+        "debug_path": {
+          "description": "Path to the directory that stores command log files for those that output them.",
+          "type": "string",
+          "default": "./debug"
+        }
+      }
+    }
+  }
+}
