@@ -2,5 +2,3 @@ debug
 build
 dist
 __pycache__
-auth-token.txt
-**/*egg-info
