@@ -1,3 +1,0 @@
-[console_scripts]
-cli_app = src.cli_app.cli:main
-
