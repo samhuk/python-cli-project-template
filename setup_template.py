@@ -49,4 +49,4 @@ replace_cli_name_occurances_in_setup_script(first_cli_name)
 replace_cli_and_project_name_occurances_in_readme(project_name, first_cli_name)
 remame_cli_directory(first_cli_name)
 
-print(f'Try running: {first_cli_name} validate')
+print(f'Done! Try running: {first_cli_name} validate')

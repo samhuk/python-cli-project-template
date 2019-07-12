@@ -16,7 +16,7 @@ readme_path = path.join(this_dir, 'README.md')
 def create_app_info_validation_result(is_success, msg=None) -> tuple:
     return (is_success, msg if is_success else ':(  Invalid app_info.json: ' + msg)
 
-def get_app_info_validation_result_pre_template_conversion(app_info: str) -> dict:
+def get_app_info_validation_result_pre_template_conversion(app_info: str) -> tuple:
     print('* Validating app_info.json')
     # check that app_info has all the mandatory properties
     for key in MANDATORY_APP_INFO_VARS:
@@ -34,7 +34,7 @@ def get_app_info_validation_result_pre_template_conversion(app_info: str) -> dic
     cli_dir = path.join(this_dir, 'src', '__cli_name')
     if path.exists(cli_dir) == False:
         return create_app_info_validation_result(False, f'Missing required directory -> {cli_dir}. Has setup_template.py been run?')
-    print(F':)  unconverted cli diretory exists ({cli_dir}).')
+    print(F':)  unconverted cli directory exists ({cli_dir}).')
 
     return create_app_info_validation_result(True)
 
@@ -56,12 +56,13 @@ def get_app_info_validation_result(app_info: str) -> dict:
     cli_dir = path.join(this_dir, 'src', get_app_info()['cli_names'][0])
     if path.exists(cli_dir) == False:
         return create_app_info_validation_result(False, f'Missing required directory -> {cli_dir}. Has setup_template.py been run?')
+    print(F':)  cli directory exists ({cli_dir}).')
 
     return create_app_info_validation_result(True)
 
 # --
 
-def get_app_info():
+def get_app_info() -> dict:
     _path = app_info_path
     if path.isfile(_path):
         try:
@@ -85,7 +86,7 @@ def get_readme() -> str:
 
 
 def ensure_valid_app_info() -> dict:
-    """Ensures app_info is valid. Will exit(1) if not. If valid, returns app_info."""
+    """Ensures app_info is valid. Will cause program to exit if not. If valid, returns app_info."""
     app_info = get_app_info()
     app_info_validation_result = get_app_info_validation_result(app_info)
     if app_info_validation_result[0] == False:
@@ -95,7 +96,8 @@ def ensure_valid_app_info() -> dict:
 
 
 def ensure_valid_app_info_pre_template_conversion() -> dict:
-    """Ensures app_info is valid. Will exit(1) if not. If valid, returns app_info."""
+    """Ensures app_info is valid. Will exit(1) if not. If valid, returns app_info.
+    This function can be deleted once project has been converted from a template."""
     app_info = get_app_info()
     app_info_validation_result = get_app_info_validation_result_pre_template_conversion(app_info)
     if app_info_validation_result[0] == False:
