@@ -11,17 +11,34 @@ app_info_path = path.join(this_dir, 'app_info.json')
 readme_path = path.join(this_dir, 'README.md')
 
 
+# -- internal functions
+
 def create_app_info_validation_result(is_success, msg=None) -> tuple:
-    return (is_success, msg if is_success else 'Invalid app_info.json: ' + msg)
+    return (is_success, msg if is_success else ':(  Invalid app_info.json: ' + msg)
 
 
 def get_app_info_validation_result(app_info: str) -> dict:
-    # check that app_info has all the mandatory values
+    print('* Validating app_info.json')
+    # check that app_info has all the mandatory properties
     for key in MANDATORY_APP_INFO_VARS:
-        if key not in app_info:
+        if key not in app_info or app_info[key] is None:
             return create_app_info_validation_result(False, f'Missing mandatory variable - "{key}"')
+        else:
+            print(F':)  app_info.{key} is defined and not null ({app_info[key]}).')
+    
+    # ensure app_info has valid value for cli_names property
+    cli_names = app_info['cli_names']
+    if cli_names is None or len(cli_names) == 0:
+        return create_app_info_validation_result(False, f'cli_names property needs to be a length>0 string list. Recieved: {cli_names}')
+
+    # ensure cli directory exists
+    cli_dir = path.join(this_dir, 'src', get_app_info()['cli_names'][0])
+    if path.exists(cli_dir) == False:
+        return create_app_info_validation_result(False, f'Missing required directory -> {cli_dir}. Has setup_template.py been run?')
+
     return create_app_info_validation_result(True)
 
+# --
 
 def get_app_info():
     _path = app_info_path
@@ -54,14 +71,3 @@ def ensure_valid_app_info() -> dict:
         print(app_info_validation_result[1])
         exit(1)
     return app_info
-
-
-def create_readme_from_template(app_name):
-    _outpath = path.join(this_dir, 'README.md')
-    new_readme = get_readme().replace('$$name', app_name)
-    with open(_outpath, 'w') as f:
-        f.write(new_readme)
-
-
-def setup_app_from_template_stage(app_name):
-    create_readme_from_template(app_name)

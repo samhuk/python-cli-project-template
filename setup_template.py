@@ -40,7 +40,7 @@ def remame_cli_directory(name):
     rename(src, dst)
 
 
-app_info = app_tools.get_app_info()
+app_info = app_tools.ensure_valid_app_info()
 project_name = app_info['project_name']
 first_cli_name = app_info['cli_names'][0]
 
@@ -48,3 +48,5 @@ first_cli_name = app_info['cli_names'][0]
 replace_cli_name_occurances_in_setup_script(first_cli_name)
 replace_cli_and_project_name_occurances_in_readme(project_name, first_cli_name)
 remame_cli_directory(first_cli_name)
+
+print(f'Try running: {first_cli_name} validate')
