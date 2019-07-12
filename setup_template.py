@@ -1,5 +1,5 @@
 """This script converts the project from a template to an active project.
-It can be deleted once it has been run (app_info.json SHOULD be kept however)."""
+This script can be deleted once it has been run (app_info.json SHOULD be kept however)."""
 
 
 from os import path, rename
