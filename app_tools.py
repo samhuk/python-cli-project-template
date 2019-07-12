@@ -16,6 +16,27 @@ readme_path = path.join(this_dir, 'README.md')
 def create_app_info_validation_result(is_success, msg=None) -> tuple:
     return (is_success, msg if is_success else ':(  Invalid app_info.json: ' + msg)
 
+def get_app_info_validation_result_pre_template_conversion(app_info: str) -> dict:
+    print('* Validating app_info.json')
+    # check that app_info has all the mandatory properties
+    for key in MANDATORY_APP_INFO_VARS:
+        if key not in app_info or app_info[key] is None:
+            return create_app_info_validation_result(False, f'Missing mandatory variable - "{key}"')
+        print(F':)  app_info.{key} is defined and not null ({app_info[key]}).')
+    
+    # ensure app_info has valid value for cli_names property
+    cli_names = app_info['cli_names']
+    if cli_names is None or len(cli_names) == 0:
+        return create_app_info_validation_result(False, f'cli_names property needs to be a length>0 string list. Recieved: {cli_names}')
+    print(F':)  app_info.cli_names is a len>0 string list ({cli_names}).')
+
+    # ensure unconverted cli_directory exists
+    cli_dir = path.join(this_dir, 'src', '__cli_name')
+    if path.exists(cli_dir) == False:
+        return create_app_info_validation_result(False, f'Missing required directory -> {cli_dir}. Has setup_template.py been run?')
+    print(F':)  unconverted cli diretory exists ({cli_dir}).')
+
+    return create_app_info_validation_result(True)
 
 def get_app_info_validation_result(app_info: str) -> dict:
     print('* Validating app_info.json')
@@ -23,13 +44,13 @@ def get_app_info_validation_result(app_info: str) -> dict:
     for key in MANDATORY_APP_INFO_VARS:
         if key not in app_info or app_info[key] is None:
             return create_app_info_validation_result(False, f'Missing mandatory variable - "{key}"')
-        else:
-            print(F':)  app_info.{key} is defined and not null ({app_info[key]}).')
+        print(F':)  app_info.{key} is defined and not null ({app_info[key]}).')
     
     # ensure app_info has valid value for cli_names property
     cli_names = app_info['cli_names']
     if cli_names is None or len(cli_names) == 0:
         return create_app_info_validation_result(False, f'cli_names property needs to be a length>0 string list. Recieved: {cli_names}')
+    print(F':)  app_info.cli_names is a len>0 string list ({cli_names}).')
 
     # ensure cli directory exists
     cli_dir = path.join(this_dir, 'src', get_app_info()['cli_names'][0])
@@ -67,6 +88,16 @@ def ensure_valid_app_info() -> dict:
     """Ensures app_info is valid. Will exit(1) if not. If valid, returns app_info."""
     app_info = get_app_info()
     app_info_validation_result = get_app_info_validation_result(app_info)
+    if app_info_validation_result[0] == False:
+        print(app_info_validation_result[1])
+        exit(1)
+    return app_info
+
+
+def ensure_valid_app_info_pre_template_conversion() -> dict:
+    """Ensures app_info is valid. Will exit(1) if not. If valid, returns app_info."""
+    app_info = get_app_info()
+    app_info_validation_result = get_app_info_validation_result_pre_template_conversion(app_info)
     if app_info_validation_result[0] == False:
         print(app_info_validation_result[1])
         exit(1)

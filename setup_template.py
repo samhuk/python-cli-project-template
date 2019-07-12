@@ -40,7 +40,7 @@ def remame_cli_directory(name):
     rename(src, dst)
 
 
-app_info = app_tools.ensure_valid_app_info()
+app_info = app_tools.ensure_valid_app_info_pre_template_conversion()
 project_name = app_info['project_name']
 first_cli_name = app_info['cli_names'][0]
 
