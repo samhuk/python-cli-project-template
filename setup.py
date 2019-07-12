@@ -40,7 +40,7 @@ license = app_info['license']
 classifiers = app_info['classifiers']
 url = app_info['url']
 
-entry_points_console_scripts = map(lambda s: f'{s}=src.{s}.cli:main', cli_names)
+entry_points_console_scripts = list(map(lambda s: f'{s}={s}.cli:main', cli_names))
 
 setup(
     name = project_name,

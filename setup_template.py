@@ -3,6 +3,7 @@ This script can be deleted once it has been run (app_info.json SHOULD be kept ho
 
 
 from os import path, rename
+from subprocess import call
 import app_tools
 
 
@@ -48,5 +49,8 @@ first_cli_name = app_info['cli_names'][0]
 replace_cli_name_occurances_in_setup_script(first_cli_name)
 replace_cli_and_project_name_occurances_in_readme(project_name, first_cli_name)
 remame_cli_directory(first_cli_name)
+
+# run install script
+call(['python', 'setup.py', 'install'])
 
 print(f'Done! Try running: {first_cli_name} validate')
