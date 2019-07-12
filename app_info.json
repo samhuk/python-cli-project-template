@@ -1,6 +1,9 @@
 {
-  "name": "cli_app",
-  "description": "CLI App",
+  "project_name": "CLI App",
+  "cli_names": [
+    "cli_app"
+  ],
+  "description": "CLI App Description",
   "author": "Joe Bloggs",
   "author_email": "joebloggs@email.com",
   "license": "MIT",
@@ -11,6 +14,5 @@
     "Natural Language :: English",
     "Operating System :: OS Independent"
   ],
-  "url": null,
-  "stage": "template"
+  "url": null
 }

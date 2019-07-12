@@ -8,11 +8,8 @@ import json
 from setuptools import Command, find_packages, find_namespace_packages, setup
 import app_tools
 
-from src.cli_app import __version__
+from src.__cli_name import __version__
 
-MANDATORY_APP_INFO_VARS = ['license', 'name', 'stage']
-DEFAULT_DESCRIPTION = ''
-TEMPLATE_STAGE = 'template'
 
 class RunTests(Command):
     """Run all tests."""
@@ -27,48 +24,27 @@ class RunTests(Command):
 
     def run(self):
         """Run all tests!"""
-        errno = call(['py.test', f'--cov={name}', '--cov-report=term-missing'])
+        errno = call(['py.test', f'--cov=src', '--cov-report=term-missing'])
         raise SystemExit(errno)
 
 
-def create_app_info_validation_result(is_success, msg=None) -> tuple:
-    return (is_success, msg if is_success else 'Invalid app_info.json: ' + msg)
+app_info = app_tools.ensure_valid_app_info()
 
-
-def get_app_info_validation_result(app_info: str) -> dict:
-    # check that app_info has all the mandatory values
-    for key in MANDATORY_APP_INFO_VARS:
-        if key not in app_info:
-            return create_app_info_validation_result(False, f'Missing mandatory variable - "{key}"')
-    
-    
-    return create_app_info_validation_result(True)
-
-
-this_dir = abspath(dirname(__file__))
-app_info = app_tools.get_app_info()
-
-# ensure app_info is valid
-app_info_validation_result = get_app_info_validation_result(app_info)
-if app_info_validation_result[0] == False:
-    print(app_info_validation_result[1])
-    exit(1)
-
-name = app_info['name']
+# create variables from app_info dict
+project_name = app_info['project_name']
+cli_names = app_info['cli_names']
 description = app_info['description']
 author = app_info['author']
 author_email = app_info['author_email']
 license = app_info['license']
 classifiers = app_info['classifiers']
 url = app_info['url']
-stage = app_info['stage']
 
-if stage == TEMPLATE_STAGE:
-    app_tools.setup_app_from_template_stage(name)
+entry_points_console_scripts = map(lambda s: f'{s}=src.{s}.cli:main', cli_names)
 
 setup(
-    name = name,
-    version = __version__,
+    name = project_name,
+    version = __version__, # Uses version of first CLI app. Could change later.
     description = description,
     long_description = app_tools.get_readme(),
     url = url,
@@ -84,9 +60,7 @@ setup(
         'test': ['coverage', 'pytest', 'pytest-cov'],
     },
     entry_points = {
-        'console_scripts': [
-            f'{name}=src.{name}.cli:main',
-        ],
+        'console_scripts': entry_points_console_scripts,
     },
     cmdclass = {'test': RunTests},
 )

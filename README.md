@@ -4,16 +4,15 @@
 
 This repository is a template for a python CLI(s) project.
 
-If the property "stage" within app_info.json equals "template", the app is in **template** stage.
-
 This section can be removed after this stage.
 
-First, one must run ```python setup.py install```. If the project is in template stage, all instances of $$name
-in this file are replaced by the "name" property value.
+To setup the template, run ```setup_template.py```.
+
+# $$project_name
 
 ## Summary
 
-$$name is an command line interface.
+$$cli_name is an command line interface.
 
 ## Prerequisites
 
@@ -23,19 +22,19 @@ Must have python >3 installed on the host system.
 
 From the root application directory: `python setup.py install` or `install` (for windows only).
 
-`$$name validate` to validate the CLI configuration.
+`$$cli_name validate` to validate the CLI configuration.
 
 ## Usage
 
-`$$name -h`
+`$$cli_name -h`
 
 ## Development
 
-To run the $$name cli as a python module directly (unpackaged), one must run the src/$$name/cli.py module, like so:
+To run the $$cli_name cli as a python module directly (unpackaged), one must run the src/$$cli_name/cli.py module, like so:
 
-`python -m src.$$name.cli <command> [<args>...]`
+`python -m src.$$cli_name.cli <command> [<args>...]`
 
 For example:
-  * `python -m src.$$name.cli -h`
-  * `python -m src.$$name.cli legend`
+  * `python -m src.$$cli_name.cli -h`
+  * `python -m src.$$cli_name.cli legend`
   * etc.
