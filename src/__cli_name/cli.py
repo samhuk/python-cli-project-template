@@ -62,6 +62,6 @@ def main(options=None):
 
 if __name__ == '__main__':
     os.environ['DEBUG'] = 'TRUE'
-    # if run via python -m xc.cli, the docopt only works in this scope
+    # if run via python -m ..., the docopt only works in this scope
     options = docopt(__doc__, version=__version__, options_first=True)
     main(options=options)

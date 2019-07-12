@@ -1,9 +1,10 @@
 {
-  "project_name": "CLI App",
+  "$schema": "./app_info.schema.json",
+  "project_name": "My CLI",
   "cli_names": [
-    "cli_app"
+    "my_cli"
   ],
-  "description": "CLI App Description",
+  "description": "My CLI Description",
   "author": "Joe Bloggs",
   "author_email": "joebloggs@email.com",
   "license": "MIT",

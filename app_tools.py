@@ -16,6 +16,7 @@ readme_path = path.join(this_dir, 'README.md')
 def create_app_info_validation_result(is_success, msg=None) -> tuple:
     return (is_success, msg if is_success else ':(  Invalid app_info.json: ' + msg)
 
+
 def get_app_info_validation_result_pre_template_conversion(app_info: str) -> tuple:
     print('* Validating app_info.json')
     # check that app_info has all the mandatory properties
@@ -23,7 +24,7 @@ def get_app_info_validation_result_pre_template_conversion(app_info: str) -> tup
         if key not in app_info or app_info[key] is None:
             return create_app_info_validation_result(False, f'Missing mandatory variable - "{key}"')
         print(F':)  app_info.{key} is defined and not null ({app_info[key]}).')
-    
+
     # ensure app_info has valid value for cli_names property
     cli_names = app_info['cli_names']
     if cli_names is None or len(cli_names) == 0:
@@ -38,6 +39,7 @@ def get_app_info_validation_result_pre_template_conversion(app_info: str) -> tup
 
     return create_app_info_validation_result(True)
 
+
 def get_app_info_validation_result(app_info: str) -> dict:
     print('* Validating app_info.json')
     # check that app_info has all the mandatory properties
@@ -45,7 +47,7 @@ def get_app_info_validation_result(app_info: str) -> dict:
         if key not in app_info or app_info[key] is None:
             return create_app_info_validation_result(False, f'Missing mandatory variable - "{key}"')
         print(F':)  app_info.{key} is defined and not null ({app_info[key]}).')
-    
+
     # ensure app_info has valid value for cli_names property
     cli_names = app_info['cli_names']
     if cli_names is None or len(cli_names) == 0:
@@ -61,6 +63,7 @@ def get_app_info_validation_result(app_info: str) -> dict:
     return create_app_info_validation_result(True)
 
 # --
+
 
 def get_app_info() -> dict:
     _path = app_info_path
@@ -99,7 +102,8 @@ def ensure_valid_app_info_pre_template_conversion() -> dict:
     """Ensures app_info is valid. Will exit(1) if not. If valid, returns app_info.
     This function can be deleted once project has been converted from a template."""
     app_info = get_app_info()
-    app_info_validation_result = get_app_info_validation_result_pre_template_conversion(app_info)
+    app_info_validation_result = get_app_info_validation_result_pre_template_conversion(
+        app_info)
     if app_info_validation_result[0] == False:
         print(app_info_validation_result[1])
         exit(1)

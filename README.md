@@ -6,7 +6,7 @@ This repository is a template for a python CLI(s) project.
 
 This section can be removed after this stage.
 
-To setup the template, run ```setup_template.py```.
+To setup the template, consult app_info.json, and then run ```python setup_template.py```.
 
 # $$project_name
 

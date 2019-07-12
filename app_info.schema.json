@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": ".",
+  "title": "XC CLI Config",
+  "description": "Global configuration (env) for the XC-CLI.",
+  "type": "object",
+  "properties": {
+    "project_name": {
+      "description": "Name of the project. This is what is published as the name of the package.",
+      "type": "string",
+      "default": "My CLI"
+    },
+    "cli_names": {
+      "description": "List of cli names. These are also the name of the cli directories within /src.",
+      "type": "array",
+      "default": ["my_cli"]
+    },
+    "description": {
+      "description": "Description of the project. This is what is published as the description of the package.",
+      "type": "string",
+      "default": ["My CLI Description"]
+    },
+    "author": {
+      "description": "Author of the project. This is what is published as the author of the package.",
+      "type": "string",
+      "default": ["Joe Bloggs"]
+    },
+    "author_email": {
+      "description": "Author's Email of the project. This is what is published as the author_email of the package.",
+      "type": "string",
+      "default": ["Joe Bloggs"]
+    },
+    "license": {
+      "description": "License of the project. This is what is published as the license of the package.",
+      "type": "string",
+      "default": ["MIT"]
+    },
+    "classifiers": {
+      "description": "List of classifiers of the project. This is what is published as the classifiers of the package.",
+      "type": "array",
+      "default": [
+        "Intended Audience :: Developers",
+        "Topic :: Utilities",
+        "License :: Proprietry",
+        "Natural Language :: English",
+        "Operating System :: OS Independent"
+      ]
+    },
+    "url": {
+      "description": "URL of the project. This is what is published as the url of the package.",
+      "type": ["null", "string"],
+      "default": "https://"
+    }
+  },
+  "required": [
+    "project_name",
+    "cli_names",
+    "license"
+  ]
+}
+
