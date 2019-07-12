@@ -35,8 +35,8 @@ def replace_cli_and_project_name_occurances_in_readme(project_name, cli_name):
 
 
 def remame_cli_directory(name):
-    src = f'src/{SETUP_SCRIPT_CLI_NAME_STRING}'
-    dst = f'src/{name}'
+    src = path.join(DIR, 'src', SETUP_SCRIPT_CLI_NAME_STRING)
+    dst = path.join(DIR, 'src', name)
     print(f'* renaming {src} to {dst}')
     rename(src, dst)
 
@@ -44,6 +44,11 @@ def remame_cli_directory(name):
 app_info = app_tools.ensure_valid_app_info_pre_template_conversion()
 project_name = app_info['project_name']
 first_cli_name = app_info['cli_names'][0]
+
+new_cli_dir = path.join(DIR, 'src', first_cli_name)
+if path.exists(new_cli_dir):
+    print(f':(  new cli directory already exists ({new_cli_dir}). Must remove this since before this script is run .')
+    exit(1)
 
 # Do replacements
 replace_cli_name_occurances_in_setup_script(first_cli_name)
