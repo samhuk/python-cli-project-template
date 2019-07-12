@@ -2,7 +2,7 @@ import itertools
 import threading
 import time
 import sys
-from .general import info
+from src.common.printouts.progress_update import info
 
 class Enum(object):
     def __init__(self):

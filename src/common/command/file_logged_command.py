@@ -1,10 +1,8 @@
-"""A base command that provides a logger file."""
-
 from command import Command
 from common.loggers.debug_file_logger import DebugFileLogger
 
 class FileLoggedCommand(Command):
-    """A base command."""
+    """A base command that provides an instance of debugFileLogger."""
 
 
     def __init__(self):
